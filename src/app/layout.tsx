@@ -9,7 +9,11 @@ import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+
+import dynamic from "next/dynamic"
+const ThemeProvider = dynamic(() => import("@/components/theme-provider"), {
+  ssr: false
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -68,7 +72,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <ClerkProvider>
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en">
           <head />
           <body
             className={cn(
